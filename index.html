@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hung Le Van | AWS Strategic Leadership Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome cho Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Toàn bộ CSS đã được gộp vào đây để đảm bảo chạy 100% */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body {
+            height: 100%; width: 100%;
+            overflow-x: hidden;
+            background-color: #232f3e;
+            font-family: 'Lato', sans-serif;
+            color: #ffffff;
+        }
+
+        body {
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .slide-container {
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 5%; /* Thay đổi padding và bỏ min-height */
+    background-color: #232f3e;
+    overflow: hidden;
+}
+
+        .slide-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 100% 0%, rgba(255, 153, 0, 0.05) 0%, transparent 40%),
+                        linear-gradient(135deg, #232f3e 0%, #1a1a1a 100%);
+            z-index: 0;
+        }
+
+        .slide-container > * { position: relative; z-index: 1; width: 100%; max-width: 1200px; }
+
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; margin: 0; }
+        h1 { font-size: clamp(40px, 5vw, 72px); font-weight: 700; color: #ffffff; line-height: 1.1; }
+        .slide-title { font-size: clamp(28px, 3vw, 42px); font-weight: 700; color: #ff9900; margin-bottom: 30px; text-transform: uppercase; border-left: 6px solid #ff9900; padding-left: 20px; }
+        h3 { font-size: clamp(20px, 2vw, 28px); font-weight: 700; color: #ff9900; margin-bottom: 15px; }
+        p, li { font-size: clamp(16px, 1.5vw, 18px); line-height: 1.6; color: #e2e8f0; }
+        .subtitle { font-size: clamp(18px, 2vw, 24px); color: #ff9900; margin-top: 10px; font-weight: 400; }
+
+        .content-area { display: flex; flex-direction: column; }
+        .title-layout { text-align: center; max-width: 1000px !important; }
+        .two-column { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; align-items: center; }
+
+        .image-wrapper { border-radius: 12px; height: 350px; overflow: hidden; border: 1px solid rgba(255, 153, 0, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .image-wrapper img { height: 100%; width: 100%; object-fit: cover; }
+
+        .tiled-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .tile { background: rgba(255, 255, 255, 0.05); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; transition: transform 0.3s ease; }
+        .tile:hover { transform: translateY(-5px); border-color: rgba(255, 153, 0, 0.5); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .tile .icon { color: #ff9900; font-size: 36px; margin-bottom: 20px; }
+
+        .chart-container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        .bar { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .bar .label { flex: 1 1 200px; text-align: right; font-weight: 700; font-size: 16px; color: #e2e8f0; }
+        .bar .bar-inner { background: rgba(255, 255, 255, 0.1); border-radius: 8px; flex: 3 1 250px; height: 30px; }
+        .bar .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 15px; font-weight: 700; background: linear-gradient(90deg, #ff9900, #ffb84d); color: #232f3e; }
+
+        .table-layout { overflow-x: auto; width: 100%; }
+        .table-layout table { width: 100%; border-collapse: collapse; background: rgba(255, 255, 255, 0.02); border-radius: 12px; min-width: 600px; }
+        .table-layout th { background: #ff9900; color: #232f3e; padding: 15px; text-align: left; font-size: 16px; }
+        .table-layout td { padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 16px; }
+
+        .section-title-layout { text-align: center; max-width: 800px !important; }
+        .section-title-layout hr { border: none; height: 4px; background: #ff9900; width: 80px; margin: 20px auto; }
+
+        .timeline-layout { 
+    display: flex; 
+    justify-content: space-between; 
+    position: relative; 
+    width: 100%; 
+    height: 280px; /* BÍ QUYẾT: Tạo chiều cao 280px để chứa đủ chữ trên và chữ dưới */
+    margin-top: 0; /* Xóa margin-top cũ để khối không bị đẩy xuống đáy nữa */
+}
+        .timeline-line { position: absolute; top: 50%; left: 0; width: 100%; height: 4px; background: rgba(255, 255, 255, 0.1); transform: translateY(-50%); }
+        .timeline-item { position: relative; width: 23%; text-align: center; z-index: 2; }
+        .timeline-item::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #ff9900; border-radius: 50%; border: 4px solid #232f3e; }
+        .timeline-item .content-wrapper { position: absolute; width: 100%; left: 0; }
+        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 25px; }
+        .timeline-item:nth-child(even) .content-wrapper { top: 50%; margin-top: 25px; }
+
+        .slide-container.bleed-image-layout { padding: 0; flex-direction: row; }
+        .bleed-image-layout .content-container { flex: 1; padding: 5% 10%; display: flex; flex-direction: column; justify-content: center; height: 100%; z-index: 2; }
+        .bleed-image-layout .image-container { flex: 1; height: 100%; z-index: 1; }
+        .bleed-image-layout .bleed-image-side { height: 100%; width: 100%; object-fit: cover; }
+
+        .bullet-list ul { list-style: none; padding: 0; }
+        .bullet-list li { position: relative; padding-left: 35px; margin-bottom: 15px; }
+        .bullet-list i { position: absolute; left: 0; top: 3px; color: #ff9900; font-size: 20px; }
+
+        .qa-layout { text-align: center; }
+        .qa-layout h2 { font-size: clamp(40px, 6vw, 80px); color: #ff9900; }
+        .contact-info { margin-top: 40px; font-size: clamp(16px, 2vw, 22px); color: #e2e8f0; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+
+        @media (max-width: 900px) {
+            .bar .label { text-align: left; flex-basis: 100%; margin-bottom: -10px; }
+            .slide-container.bleed-image-layout { flex-direction: column; }
+            .bleed-image-layout .image-container { display: none; }
+            .timeline-layout { flex-direction: column; margin-top: 40px; gap: 20px; }
+            .timeline-line { left: 10px; top: 0; width: 4px; height: 100%; transform: none; }
+            .timeline-item { width: 100%; text-align: left; padding-left: 40px; margin-bottom: 0; }
+            .timeline-item::after { left: 10px; top: 0; transform: translate(-50%, 0); }
+            .timeline-item .content-wrapper { position: relative; bottom: auto !important; top: auto !important; margin: 0 !important; }
+            .contact-info { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+    <div class="title-layout">
+        <h1>HUNG LE VAN</h1>
+        <div class="subtitle">Senior Sales Leader | Vietnam Country Lead Candidate</div>
+        <p style="margin-top: 30px; font-size: 18px; color: #cbd5e1; letter-spacing: 2px;">STRATEGIC CLOUD ADVISORY & CYBER RESILIENCE</p>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="section-title-layout">
+        <hr>
+        <h2>THE LEADERSHIP PROFILE</h2>
+        <p>Bridging the gap between C-Suite objectives and AWS Cloud architectures.</p>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Professional Summary</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p>High-impact Senior Sales Leader with over <strong>15 years of experience</strong> driving market expansion and Digital Transformation across Government, Manufacturing, and Energy sectors.</p>
+                <p style="margin-top: 20px;">Certified <strong>AWS Solutions Architect</strong> currently specializing in Cyber Security to ensure data resilience for national-scale infrastructure.</p>
+                <ul style="margin-top: 30px;" class="bullet-list">
+                    <li><i class="fa-solid fa-check-circle"></i> Proven track record in "Whitespace" territories</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Master of MEDDPICC & BANT methodologies</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="images/profile.jpg" alt="my-images">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Core Competencies</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-users-gear"></i></div>
+                <h3>Sales Leadership</h3>
+                <p>Recruiting & developing high-performing teams. Expert in territory strategy and performance management to over-deliver on complex quotas.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Security & AI</h3>
+                <p>Deep expertise in Cyber Resilience, AI-powered threat detection, and secure AWS cloud storage architectures.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-handshake-simple"></i></div>
+                <h3>Strategic GTM</h3>
+                <p>Establishing brand presence in new markets. Expert in channel ecosystem management and high-stakes commercial negotiations ($3.5M+).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="section-title-layout">
+        <hr>
+        <h2>AWS BUSINESS VALUE</h2>
+        <p>Why Vietnam's Leaders are Accelerating Growth on AWS Infrastructure.</p>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">The Business Case for AWS</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Cost Efficiency</h3>
+                <p>Shifting CapEx to OpEx with <strong>51% reduction</strong> in operational costs. Pay-as-you-go model allows reinvestment into core innovation.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Business Agility</h3>
+                <p>Accelerating time-to-market by <strong>43%</strong>. Build, test, and deploy enterprise applications in minutes, not weeks.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-brain"></i></div>
+                <h3>AI & Innovation</h3>
+                <p>Unlocking data-driven insights with <strong>AWS Bedrock & SageMaker</strong>. 3x more application features delivered per year.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Operational Impact of AWS</h2>
+    <div class="content-area">
+        <div class="chart-container">
+            <div class="bar">
+                <div class="label">Operational Cost Reduction</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 51%;">51%</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">IT Infrastructure Efficiency</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 47%;">47%</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">Unplanned Downtime Reduction</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 69%;">69%</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">Feature Delivery Speed</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 90%;">3x Speed</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="slide-container bleed-image-layout">
+    <div class="content-container">
+        <h2 class="slide-title">AVEVA Leadership</h2>
+        <div class="content-area">
+            <h3>Senior Account Manager</h3>
+            <p>Managed real-time data ingestion for major Oil & Gas plants. Transitioned legacy on-premise customers to <strong>Secure SaaS/Hybrid Cloud</strong> models, ensuring zero data downtime for industrial IoT systems.</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" alt="Data Center">
+    </div>
+</div>
+
+<div class="slide-container bleed-image-layout">
+    <div class="image-container">
+        <img class="bleed-image-side" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop" alt="Security">
+    </div>
+    <div class="content-container">
+        <h2 class="slide-title">Cyber Resilience</h2>
+        <div class="content-area">
+            <h3>AWS Security Specialty</h3>
+            <p>Focusing on <strong>Data Protection (KMS/Encryption)</strong> and AI-driven Security Analytics to automate incident response.</p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <h2 class="slide-title">Professional Journey</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2009 - 2015</h3>
+                    <p><strong>ESRI Vietnam</strong><br>BDM - GTM Setup</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2016 - 2022</h3>
+                    <p><strong>ESRI Vietnam</strong><br>BD Director</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2022 - 2024</h3>
+                    <p><strong>AVEVA</strong><br>Senior Territory Manager</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2025 - Present</h3>
+                    <p><strong>AWS Advisor</strong><br>Cloud Strategy Consultant</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="qa-layout">
+        <h2>LET'S CONNECT</h2>
+        <p style="font-size: 24px; margin-top: 20px;">Ready to Drive Vietnam's Cloud Future Together.</p>
+        <div class="contact-info">
+            <p><i class="fa-solid fa-envelope" style="color:#ff9900;"></i> Hunglv.3h@gmail.com</p>
+            <p><i class="fa-solid fa-phone" style="color:#ff9900;"></i> +84-979-886-677</p>
+            <p><i class="fa-solid fa-location-dot" style="color:#ff9900;"></i> Hanoi, Vietnam</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
