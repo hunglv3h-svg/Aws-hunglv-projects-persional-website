@@ -7,8 +7,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write   # Đã đưa ra ngoài lề, ngang hàng với 'on' và 'name'
+  id-token: write   
   contents: read
+
+# Thêm biến môi trường ở cấp độ Global để tắt cảnh báo Node.js 20 của GitHub
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  # Định nghĩa luôn biến TF_VAR_ ở đây để cả Plan và Apply đều tự động nhận diện
+  TF_VAR_bucket_name: ${{ secrets.BUCKET_NAME }}
 
 jobs:
   Create-bucket:
@@ -16,8 +22,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        
       - name: Set up AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@v4 # Cập nhật lên v4 (ổn định nhất hiện tại)
         with:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
@@ -30,16 +37,11 @@ jobs:
         working-directory: terraform
       
       - name: Terraform Plan
-        env:
-          BUCKET_NAME: ${{ secrets.BUCKET_NAME}}
-        run: |
-          terraform plan \
-            -var="bucket_name=$BUCKET_NAME"
+        # Sử dụng cờ -out=tfplan để xuất kết quả ra file
+        run: terraform plan -out=tfplan
         working-directory: terraform
 
       - name: Terraform Apply
-        env:
-          TF_VAR_bucket_name: ${{ secrets.BUCKET_NAME }}
-        run: terraform apply -auto-approve
+        # Chạy apply dựa trên đúng file tfplan vừa tạo, không cần -auto-approve nữa
+        run: terraform apply tfplan
         working-directory: terraform
-
