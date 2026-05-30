@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Set up AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4 # Cập nhật lên v4 (ổn định nhất hiện tại)
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
@@ -35,6 +35,12 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
         working-directory: terraform
+
+      # --- BƯỚC MỚI ĐƯỢC THÊM VÀO ĐỂ FIX LỖI MẤT STATE ---
+      - name: Import Existing Bucket to State
+        run: terraform import aws_s3_bucket.static_site ${{ secrets.BUCKET_NAME }} || true
+        working-directory: terraform
+      # ---------------------------------------------------
       
       - name: Terraform Plan
         # Sử dụng cờ -out=tfplan để xuất kết quả ra file
@@ -51,4 +57,3 @@ jobs:
           aws s3 cp index.html s3://${{ secrets.BUCKET_NAME }}/index.html
           aws s3 cp --recursive images/ s3://${{ secrets.BUCKET_NAME }}/images/
           aws s3 cp --recursive styles/ s3://${{ secrets.BUCKET_NAME }}/styles/
-
